@@ -93,15 +93,23 @@ class symbolic_regression():
                 # ACCEPT MUTATION??
                 
             else:
-                                        
-                parent_1 = self.tournament(population)
+                
+                while True:
+                    parent_1 = self.tournament(population)
+                    
+                    if parent_1.operation != "const" and parent_1.operation != "var":
+                        break
 
                 # Make sure both parents are different expressions
                 while True:
-                    parent_2 = self.tournament(population)
+                    while True:
+                        parent_2 = self.tournament(population)
+                        if parent_2.operation != "const" and parent_2.operation != "var":
+                            break
 
                     if parent_1 != parent_2:
                         break
+
                         
                 # Make sure both kids are not overly complex
                 while True:
