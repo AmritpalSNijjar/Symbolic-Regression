@@ -79,9 +79,17 @@ class symbolic_regression():
                     expression = mutate_expression_form(expression, self.possible_vars)
 
                 elif action == "mutate_operation":
+                    if expression.operation == "const" or expression.operation == "var":
+                        # If the expression is a single constant or variable it is skipped,
+                        # because there is no operation to mutate.
+                        continue
                     expression.mutate_random_operator()
 
                 elif action == "delete_subtree":
+                    if expression.operation == "const" or expression.operation == "var":
+                        # If the expression is a single constant or variable it is skipped,
+                        # because there is no subtree to delete
+                        continue
                     delete_subtree(expression, self.possible_vars)
 
                 elif action == "new_tree":
@@ -306,7 +314,7 @@ class symbolic_regression():
             except: 
                 popt = p0
 
-            optim_consts[i] = popt
+            optim_consts[i] = np.real(popt)
             
         for k, const in enumerate(consts):
             const.left = np.random.choice(optim_consts[:, k])

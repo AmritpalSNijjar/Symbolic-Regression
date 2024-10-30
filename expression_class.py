@@ -394,7 +394,7 @@ class Expression():
             
         node.left *= factor
         
-        self.update()
+        #self.update()
         
     def mutate_random_operator(self):
         node = self.select_random_node("op")
