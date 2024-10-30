@@ -55,7 +55,7 @@ class symbolic_regression():
         sub_population = np.random.choice(population, size = self.tournament_size)
         
         fitnesses      = [self.fitness(expression) for expression in sub_population] # DEFINE SELF.FITNESS
-        best_ind       = np.argmax(fitnesses)
+        best_ind       = np.argmin(fitnesses)
         
         return sub_population[best_ind]
     
