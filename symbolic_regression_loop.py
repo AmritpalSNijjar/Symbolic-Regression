@@ -70,8 +70,8 @@ class symbolic_regression():
                 
                 if expression.operation == "const" or expression.operation == "var":
                     action = "new_tree"
-                
-                action = np.random.choice(["mutate_const", "mutate_form", "mutate_operation", "delete_subtree", "new_tree"], p=self.mutation_probs)
+                else:
+                    action = np.random.choice(["mutate_const", "mutate_form", "mutate_operation", "delete_subtree", "new_tree"], p=self.mutation_probs)
                 
                 T = 1 - i/self.num_mutations # ANNEALING TEMPERATURE 
 
