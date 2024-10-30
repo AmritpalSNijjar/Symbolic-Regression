@@ -68,6 +68,9 @@ class symbolic_regression():
                 
                 expression = self.tournament(population)
                 
+                if expression.operation == "const" or expression.operation == "var":
+                    action = "new_tree"
+                
                 action = np.random.choice(["mutate_const", "mutate_form", "mutate_operation", "delete_subtree", "new_tree"], p=self.mutation_probs)
                 
                 T = 1 - i/self.num_mutations # ANNEALING TEMPERATURE 
@@ -79,23 +82,15 @@ class symbolic_regression():
                     expression = mutate_expression_form(expression, self.possible_vars)
 
                 elif action == "mutate_operation":
-                    if expression.operation == "const" or expression.operation == "var":
-                        # If the expression is a single constant or variable it is skipped,
-                        # because there is no operation to mutate.
-                        continue
                     expression.mutate_random_operator()
 
                 elif action == "delete_subtree":
-                    if expression.operation == "const" or expression.operation == "var":
-                        # If the expression is a single constant or variable it is skipped,
-                        # because there is no subtree to delete
-                        continue
                     delete_subtree(expression, self.possible_vars)
 
                 elif action == "new_tree":
                     expression = random_expression(expression.depth, self.possible_vars)
                     
-                # ACCEPT TRADE???
+                # ACCEPT MUTATION??
                 
             else:
                                         
